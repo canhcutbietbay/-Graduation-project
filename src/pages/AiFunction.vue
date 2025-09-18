@@ -1,10 +1,10 @@
 <template>
     <div>
-        dashboard
+        AI FUNCTION
     </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 
 </script>
 

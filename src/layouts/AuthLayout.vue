@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-main class="d-flex align-center justify-center" style="min-height: 100vh;">
+        <v-main class="d-flex align-center justify-center " style="min-height: 100vh;">
             <v-container class="pa-6" max-width="400">
                 <router-view />
             </v-container>

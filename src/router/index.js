@@ -8,9 +8,12 @@ import DefaultLayout from '../layouts/DefaultLayout.vue'
 // Pages
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
-import Dashboard from '../pages/Dashboard.vue'
+import Overview from '../pages/Overview.vue'
 import Transactions from '../pages/Transactions.vue'
 import Profile from '../pages/Profile.vue'
+import Categories from '../pages/Categories.vue'
+import Accounts from '../pages/Accounts.vue'
+import AiFunction from '../pages/AiFunction.vue'
 
 const routes = [
     {
@@ -26,9 +29,12 @@ const routes = [
         path: '/',
         component: DefaultLayout,
         children: [
-            { path: '', name: 'Dashboard', component: Dashboard },
+            { path: '', name: 'Overview', component: Overview },
             { path: 'transactions', name: 'Transactions', component: Transactions },
             { path: 'profile', name: 'Profile', component: Profile },
+            { path: 'categories', name: 'Categories', component: Categories },
+            { path: 'accounts', name: 'Accounts', component: Accounts },
+            { path: 'aifunction', name: 'AiFunction', component: AiFunction },
         ],
         meta: { requiresAuth: true },
     },
@@ -50,7 +56,7 @@ const router = createRouter({
 //     if (to.meta.requiresAuth && !authStore.accessToken) {
 //         next({ name: 'Login' })
 //     } else if (to.name === 'Login' && authStore.accessToken) {
-//         next({ name: 'Dashboard' })
+//         next({ name: 'Overview' })
 //     } else {
 //         next()
 //     }
