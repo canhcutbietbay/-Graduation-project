@@ -6,11 +6,10 @@
 import { onMounted, ref } from 'vue'
 import AccountTable from '../components/accounts/AccountTable.vue'
 import api from '../plugins/api'
-
-const accounts = ref([])
+import accounts from '../mockDB/accounts'
 
 onMounted(async () => {
-    accounts.value = (await api.get('/accounts')).data
+    // accounts.value = (await api.get('/accounts')).data
 })
 </script>
 

@@ -51,10 +51,13 @@ import swal from '../../plugins/swal';
 import { formatPriceNoSuffix } from '../../utils/format';
 import api from '../../plugins/api';
 
+import categories from '../../mockDB/categories';
+import accounts from '../../mockDB/accounts';
+
 const form = ref(null)
 const valid = ref(false)
-const accounts = ref([])
-const categories = ref([])
+const localAccounts = ref([])
+const localCategories = ref([])
 
 const localItem = ref({})
 
@@ -69,8 +72,10 @@ const props = defineProps({
 });
 
 onMounted(async () => {
-    accounts.value = await (await api.get('/accounts')).data
-    categories.value = (await api.get('/categories')).data
+    // accounts.value = await (await api.get('/accounts')).data
+    // categories.value = (await api.get('/categories')).data
+    localAccounts.value = accounts
+    localCategories.value = categories
 })
 
 const ruleRequires = ref([

@@ -6,11 +6,11 @@
 import { onMounted, ref } from 'vue'
 import CategoryTable from '../components/categories/CategoryTable.vue'
 import api from '../plugins/api'
+import categories from '../mockDB/categories'
 
-const categories = ref([])
 
 onMounted(async () => {
-    categories.value = (await api.get('/categories')).data
+    // categories.value = (await api.get('/categories')).data
 })
 </script>
 
