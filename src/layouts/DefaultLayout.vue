@@ -47,17 +47,20 @@
                     <router-view />
                 </v-container>
             </v-main>
-            <v-bottom-navigation v-model="value" color="primary" grow mandatory
-                style="overflow-x: auto !important; scrollbar-width: thin;">
-                <v-btn v-for="item in menuItems" @click="navigateTo(item.to)">
-                    <v-icon>{{ item.icon }}</v-icon>
-                </v-btn>
-                <v-btn @click="navigateTo({ name: 'Profile' })">
-                    <v-avatar size="28">
-                        <v-img :src="user.avatar" alt="Avatar"></v-img>
-                    </v-avatar>
-                </v-btn>
-            </v-bottom-navigation>
+            <v-container>
+
+                <v-bottom-navigation v-model="value" color="primary" grow mandatory app
+                    style="overflow-x: auto !important; scrollbar-width: thin;">
+                    <v-btn v-for="item in menuItems" @click="navigateTo(item.to)">
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-btn>
+                    <v-btn @click="navigateTo({ name: 'Profile' })">
+                        <v-avatar size="28">
+                            <v-img :src="user.avatar" alt="Avatar"></v-img>
+                        </v-avatar>
+                    </v-btn>
+                </v-bottom-navigation>
+            </v-container>
         </div>
 
     </v-app>
@@ -97,5 +100,9 @@ const navigateTo = (to) => {
     white-space: normal !important;
     text-overflow: unset !important;
     overflow: visible !important;
+}
+
+.v-bottom-navigation__content {
+    justify-content: left;
 }
 </style>
