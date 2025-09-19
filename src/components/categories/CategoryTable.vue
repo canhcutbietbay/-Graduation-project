@@ -11,8 +11,10 @@
                     Nhóm
                 </v-toolbar-title>
 
-                <v-btn class="me-2" prepend-icon="mdi-plus" rounded="lg" text="Thêm mới nhóm" border variant="text"
-                    color="primary" @click="addNewCategory"></v-btn>
+                <v-btn class="ma-2" rounded="lg" border variant="text" color="primary" @click="addNewCategory">
+                    <v-icon>mdi-plus</v-icon>
+                    <span v-if="!mobile">Thêm mới nhóm</span>
+                </v-btn>
             </v-toolbar>
         </template>
         <!-- action  -->
@@ -31,6 +33,11 @@
 import { ref } from 'vue'
 import CategoryForm from './CategoryForm.vue'
 import swal from '../../plugins/swal'
+import { useDisplay } from 'vuetify'
+
+const { mobile } = useDisplay()
+
+
 const props = defineProps(['categories'])
 
 const search = ref(null)
@@ -39,7 +46,7 @@ const selectedItem = ref(null)
 
 const headers = [
     { title: 'Tên hiển thị', align: 'start', key: 'name' },
-    { title: 'Ghi chú', align: 'start', key: 'description' },
+    { title: 'Ghi chú', align: 'start', key: 'description', minWidth: '200px' },
     { title: 'Hành động', key: 'actions', align: 'center', sortable: false, width: '200px' },
 ]
 

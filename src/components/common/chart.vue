@@ -1,7 +1,7 @@
 <template>
-    <div class="d-flex justify-center align-center">
+    <v-card class="d-flex justify-center align-center w-100 h-100 border-md rounded-xl">
         <canvas ref="chartCanvas"></canvas>
-    </div>
+    </v-card>
 </template>
 
 <script setup>

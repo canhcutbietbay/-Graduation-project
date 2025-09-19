@@ -5,29 +5,29 @@
             <v-card-text>
                 <v-form ref="form" v-model="valid">
                     <v-row>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <datePick v-model="localItem.date" label="Ngày giao dịch" :rules="ruleRequires" />
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-select :items="typeArray" item-title="title" item-value="value" variant="outlined"
                                 density="compact" label="Loại giao dịch" v-model="localItem.type"
                                 :rules="ruleRequires"></v-select>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-text-field variant="outlined" density="compact" label="Số tiền" v-model="displayPrice"
                                 type="text" suffix="VND" @keypress="(e) => !/[0-9]/.test(e.key) && e.preventDefault()"
                                 :rules="ruleRequires"></v-text-field>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-select :items="categories" item-title="name" item-value="id" variant="outlined"
                                 density="compact" label="Nhóm" v-model="localItem.category"
                                 :rules="ruleRequires"></v-select>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-text-field variant="outlined" density="compact" label="Ghi chú"
                                 v-model="localItem.description" :rules="ruleRequires"></v-text-field>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-select :items="accounts" item-title="name" item-value="id" variant="outlined"
                                 density="compact" label="Tài khoản" v-model="localItem.account"
                                 :rules="ruleRequires"></v-select>

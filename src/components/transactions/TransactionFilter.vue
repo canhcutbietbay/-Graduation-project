@@ -1,35 +1,35 @@
 <template>
     <!-- Filter type -->
     <v-row class="mb-2 ">
-        <v-col cols="3">
+        <v-col cols="12" md="3">
             <v-select v-model="filterType" :items="timeFilters" item-title="label" item-value="value"
                 hide-details="true" label="Loại thời gian" variant="outlined" />
         </v-col>
 
         <!-- Theo ngày -->
-        <v-col cols="8" v-if="filterType === 'day'" class="d-flex ga-6 ">
+        <v-col cols="12" md="8" v-if="filterType === 'day'" class="d-flex ga-6 ">
             <datePick v-model="dateRange.start" label="Từ ngày" />
             <datePick v-model="dateRange.end" label="Đến ngày" />
         </v-col>
 
         <!-- Theo tuần -->
-        <v-col cols="8" v-if="filterType === 'week'" class="d-flex ga-6 ">
+        <v-col cols="12" md="8" v-if="filterType === 'week'" class="d-flex ga-6 ">
             <v-select v-model="selectedYear" :items="years" label="Chọn năm" variant="outlined" hide-details="true" />
             <v-select v-model="selectedMonth" :items="months" item-title="label" item-value="value" label="Chọn tháng"
                 variant="outlined" hide-details="true" />
         </v-col>
 
         <!-- Theo tháng -->
-        <v-col cols="8" v-if="filterType === 'month'">
+        <v-col cols="12" md="8" v-if="filterType === 'month'">
             <v-select v-model="selectedYear" :items="years" label="Chọn năm" variant="outlined" hide-details="true" />
         </v-col>
         <!-- Theo năm -->
-        <v-col cols="8" v-if="filterType === 'year'" class="d-flex ga-6 ">
+        <v-col cols="12" md="8" v-if="filterType === 'year'" class="d-flex ga-6 ">
             <v-select v-model="yearRange.start" :items="years" label="Từ năm" variant="outlined" hide-details="true" />
             <v-select v-model="yearRange.end" :items="years" label="Đến năm" variant="outlined" hide-details="true" />
         </v-col>
 
-        <v-col cols="1" class="d-flex justify-center align-center ">
+        <v-col cols="12" md="1" class="d-flex justify-center align-center ">
             <v-btn @click="handleFilter" color="primary" block>Lọc</v-btn>
         </v-col>
     </v-row>

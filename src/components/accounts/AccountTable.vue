@@ -11,8 +11,10 @@
                     Tài khoản
                 </v-toolbar-title>
 
-                <v-btn class="me-2" prepend-icon="mdi-plus" rounded="lg" text="Thêm mới tài khoản" border variant="text"
-                    color="primary" @click="addNewAccount"></v-btn>
+                <v-btn class="me-2" rounded="lg" border variant="text" color="primary" @click="addNewAccount">
+                    <v-icon>mdi-plus</v-icon>
+                    <span v-if="!mobile">Thêm mới tài khoản</span>
+                </v-btn>
             </v-toolbar>
         </template>
         <!-- action  -->
@@ -31,6 +33,11 @@
 import { ref } from 'vue'
 import AccountForm from './AccountForm.vue'
 import swal from '../../plugins/swal'
+import { useDisplay } from 'vuetify'
+
+const { mobile } = useDisplay()
+
+
 const props = defineProps(['accounts'])
 
 const search = ref(null)

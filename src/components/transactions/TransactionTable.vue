@@ -8,11 +8,13 @@
             <v-toolbar flat>
                 <v-toolbar-title>
                     <v-icon icon="mdi-history" size="x-small" start></v-icon>
-                    Các giao dịch gần đây
+                    Giao dịch gần đây
                 </v-toolbar-title>
 
-                <v-btn class="me-2" prepend-icon="mdi-plus" rounded="lg" text="Thêm mới giao dịch" border variant="text"
-                    color="primary" @click="addNewTransaction"></v-btn>
+                <v-btn class="me-2" rounded="lg" border variant="text" color="primary" @click="addNewTransaction">
+                    <v-icon>mdi-plus</v-icon>
+                    <span v-if="!mobile">Thêm mới giao dịch</span>
+                </v-btn>
             </v-toolbar>
         </template>
         <!-- format -->
@@ -39,6 +41,11 @@ import { ref } from 'vue'
 import { formatPrice, formatVietnamDate } from '../../utils/format'
 import TransactionForm from './TransactionForm.vue'
 import swal from '../../plugins/swal'
+import { useDisplay } from 'vuetify'
+
+const { mobile } = useDisplay()
+
+
 const props = defineProps(['transactions'])
 
 const search = ref(null)
