@@ -10,7 +10,15 @@
                     <v-icon icon="mdi-history" size="x-small" start></v-icon>
                     Giao dịch gần đây
                 </v-toolbar-title>
-
+                <v-btn class="mr-2" rounded="lg" border variant="elevated" color="primary" @click="exportPDF">
+                    <v-icon class="">mdi-file-export-outline</v-icon>
+                </v-btn>
+                <json-excel :data="transactions" :fields="json_fields" worksheet="Các giao dịch gần đây" type="xlsx"
+                    name="data.xlsx">
+                    <v-btn class="mr-2" rounded="lg" border variant="elevated" color="primary">
+                        <v-icon class="">mdi-microsoft-excel</v-icon>
+                    </v-btn>
+                </json-excel>
                 <v-btn class="me-2" rounded="lg" border variant="text" color="primary" @click="addNewTransaction">
                     <v-icon>mdi-plus</v-icon>
                     <span v-if="!mobile">Thêm mới giao dịch</span>
@@ -42,15 +50,32 @@ import { formatPrice, formatVietnamDate } from '../../utils/format'
 import TransactionForm from './TransactionForm.vue'
 import swal from '../../plugins/swal'
 import { useDisplay } from 'vuetify'
+import JsonExcel from "vue-json-excel3";
+import pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 const { mobile } = useDisplay()
-
-
 const props = defineProps(['transactions'])
 
-const search = ref(null)
-const isOpen = ref(false)
-const selectedItem = ref(null)
+
+const json_fields = ref({
+    "Ngày giao dịch": {
+        field: "date",
+        callback: (value) => {
+            return formatVietnamDate(value)
+        }
+    },
+    "Loại giao dịch": {
+        field: "type",
+        callback: (value) => {
+            return getType(value)
+        }
+    },
+    "Số tiền": "amount",
+    "Nhóm": "category",
+    "Tài khoản": "account",
+    "Ghi chú": "description",
+})
 
 const typeMap = ref({
     income: 'Thu nhập',
@@ -58,6 +83,53 @@ const typeMap = ref({
 })
 
 const getType = (type) => typeMap.value[type] || ''
+
+const tableTransactions = {
+    headerRows: 1,
+    widths: ['*', '*', '*', '*', '*', '*'],
+    body: [
+        [
+            { text: 'Ngày giao dịch', style: 'tableHeader' },
+            { text: 'Loại giao dịch', style: 'tableHeader' },
+            { text: 'Số tiền', style: 'tableHeader' },
+            { text: 'Nhóm', style: 'tableHeader' },
+            { text: 'Tài khoản', style: 'tableHeader' },
+            { text: 'Ghi chú', style: 'tableHeader' },
+        ],
+        ...props.transactions.sort((a, b) => (a.date < b.date ? 1 : -1)).map(item => [
+            { text: formatVietnamDate(item.date), style: 'tableCellCenter' },
+            { text: getType(item.type), style: 'tableCellCenter' },
+            { text: formatPrice(item.amount), style: 'tableCellRight' },
+            { text: item.category, style: 'tableCellCenter' },
+            { text: item.account, style: 'tableCellCenter' },
+            { text: item.description, style: 'tableCellLeft' },
+        ])
+    ]
+};
+
+const docDefinition = {
+    pageOrientation: 'landscape',
+    content: [
+        { text: 'CÁC GIAO DỊCH GẦN ĐÂY', style: 'title' },
+        { table: tableTransactions }
+    ],
+    styles: {
+        title: { fontSize: 18, bold: true, alignment: 'center', margin: [0, 10, 0, 5] },
+        tableHeader: { bold: true, fontSize: 12, alignment: 'center' },
+        tableCellLeft: { alignment: 'left' },
+        tableCellCenter: { alignment: 'center' },
+        tableCellRight: { alignment: 'right' }
+    }
+};
+
+const exportPDF = () => {
+    pdfMake.createPdf(docDefinition, undefined, undefined, pdfFonts).download("Các giao dịch gần đây.pdf");
+}
+
+
+const search = ref(null)
+const isOpen = ref(false)
+const selectedItem = ref(null)
 
 const headers = [
     { title: 'Ngày giao dịch', align: 'center', key: 'date', },
@@ -85,6 +157,8 @@ const deleteTransaction = (item) => {
         icon: "info",
     });
 }
+
+
 </script>
 
 <style></style>

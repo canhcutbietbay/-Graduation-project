@@ -17,12 +17,11 @@
                 </v-list>
 
                 <v-list>
-                    <v-list-item v-for="item in menuItems" :key="item.title" :to="item.to" :prepend-icon="item.icon"
-                        link color="primary" exact>
-                        <!-- custom title -->
-                        <v-list-item-title class="wrap-text">
+                    <v-list-item v-for="item in menuItems" :key="item.title" :to="item.to" link color="primary" exact>
+                        <div class="d-flex justify-start align-center ga-2">
+                            <v-icon color="primary">{{ item.icon }}</v-icon>
                             {{ item.title }}
-                        </v-list-item-title>
+                        </div>
                     </v-list-item>
                 </v-list>
                 <template v-slot:append>
@@ -83,7 +82,14 @@ const menuItems = [
     { title: 'QUẢN LÍ GIAO DỊCH', icon: 'mdi-cash-multiple', to: { name: 'Transactions' } },
     { title: 'QUẢN LÍ NHÓM', icon: 'mdi-shape', to: { name: 'Categories' } },
     { title: 'QUẢN LÍ TÀI KHOẢN', icon: 'mdi-account-cog', to: { name: 'Accounts' } },
-    { title: 'CHỨC NĂNG AI', icon: 'mdi-robot-outline', to: { name: 'AiFunction' } },
+    { title: 'TIẾT KIỆM', icon: 'mdi-wallet', to: { name: 'Saving' } },
+    {
+        title: 'CHỨC NĂNG AI', icon: 'mdi-robot-outline', to: {
+            name: 'AiFunction', params: {
+                id: "1"
+            }
+        }
+    },
 ]
 
 const theme = useTheme()
@@ -96,12 +102,6 @@ const navigateTo = (to) => {
 }
 </script>
 <style>
-.wrap-text {
-    white-space: normal !important;
-    text-overflow: unset !important;
-    overflow: visible !important;
-}
-
 .v-bottom-navigation__content {
     justify-content: left;
 }

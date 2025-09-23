@@ -1,5 +1,5 @@
 <template>
-    <v-card class="d-flex justify-center align-center w-100 h-100 border-md rounded-xl">
+    <v-card class="d-flex justify-center align-center w-100 h-100 rounded-xl elevation-4 border-md">
         <canvas ref="chartCanvas"></canvas>
     </v-card>
 </template>

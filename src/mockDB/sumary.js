@@ -108,7 +108,9 @@ export default {
         "value": 27500000,
         "currency": "VND",
         "change": 3500000,
-        "trend": "up"
+        "trend": "up",
+        "income": 35000000,
+        "expense": 7500000
     },
     "byAccount": {
         "labels": [
