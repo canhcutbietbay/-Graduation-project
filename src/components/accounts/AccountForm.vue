@@ -5,11 +5,11 @@
             <v-card-text>
                 <v-form ref="form" v-model="valid">
                     <v-row>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-text-field variant="outlined" density="compact" label="Tên hiển thị"
                                 v-model="localItem.name" :rules="ruleRequires"></v-text-field>
                         </v-col>
-                        <v-col cols="6">
+                        <v-col cols="12" md="6">
                             <v-text-field variant="outlined" density="compact" label="Ghi chú"
                                 v-model="localItem.description" :rules="ruleRequires"></v-text-field>
                         </v-col>
@@ -58,7 +58,7 @@ const isAddNew = computed(() => {
 })
 
 const title = computed(() => {
-    return isAddNew ? "Thêm mới tài khoản" : "Chỉnh sửa tài khoản"
+    return isAddNew.value ? "Thêm mới tài khoản" : "Chỉnh sửa tài khoản"
 })
 
 const addNew = async () => {

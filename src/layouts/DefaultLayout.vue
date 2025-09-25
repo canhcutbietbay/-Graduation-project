@@ -3,7 +3,7 @@
         <!-- Navbar -->
         <v-app-bar app color="primary" dark class="d-flex justify-space-between">
             <v-app-bar-nav-icon v-if="!mobile" @click="drawer = !drawer" />
-            <v-toolbar-title class="md:text-h4" style="font-size: 16px;">QUẢN LÍ CHI TIÊU CÁ NHÂN</v-toolbar-title>
+            <v-toolbar-title class="md:text-h4" style="font-size: 18px;">QUẢN LÍ CHI TIÊU CÁ NHÂN</v-toolbar-title>
             <v-btn icon @click="toggleTheme">
                 <v-icon>mdi-theme-light-dark</v-icon>
             </v-btn>
@@ -82,7 +82,7 @@ const menuItems = [
     { title: 'QUẢN LÍ GIAO DỊCH', icon: 'mdi-cash-multiple', to: { name: 'Transactions' } },
     { title: 'QUẢN LÍ NHÓM', icon: 'mdi-shape', to: { name: 'Categories' } },
     { title: 'QUẢN LÍ TÀI KHOẢN', icon: 'mdi-account-cog', to: { name: 'Accounts' } },
-    { title: 'TIẾT KIỆM', icon: 'mdi-wallet', to: { name: 'Saving' } },
+    { title: 'NGÂN SÁCH', icon: 'mdi-wallet', to: { name: 'Budget' } },
     {
         title: 'CHỨC NĂNG AI', icon: 'mdi-robot-outline', to: {
             name: 'AiFunction', params: {

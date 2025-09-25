@@ -13,7 +13,7 @@ import Transactions from '../pages/Transactions.vue'
 import Profile from '../pages/Profile.vue'
 import Categories from '../pages/Categories.vue'
 import Accounts from '../pages/Accounts.vue'
-import Saving from '../pages/Saving.vue'
+import Budget from '../pages/Budget.vue'
 import AiFunction from '../pages/AiFunction.vue'
 
 const routes = [
@@ -36,7 +36,7 @@ const routes = [
             { path: 'categories', name: 'Categories', component: Categories },
             { path: 'accounts', name: 'Accounts', component: Accounts },
             { path: 'aifunction/:id', name: 'AiFunction', component: AiFunction },
-            { path: 'saving', name: 'Saving', component: Saving },
+            { path: 'budget', name: 'Budget', component: Budget },
         ],
         meta: { requiresAuth: true },
     },

@@ -18,19 +18,39 @@
         <v-progress-circular indeterminate color="primary" size="64"></v-progress-circular>
     </v-container>
 
-    <v-container class="h-100 w-100 d-flex flex-column" v-else>
-        <v-row v-for="(chat, index) in localChats" :key="chat.id">
+    <v-container class=" w-100 d-flex flex-column" :style="localChats.length > 0 ? 'min-height: 100vh' : ''" v-else>
+        <v-row v-if="localChats.length > 0" v-for="(chat, index) in localChats" :key="chat.id">
             <v-col cols="12" class="d-flex justify-end">
-                <v-chip rounded="xl" label>{{ chat.question }}</v-chip>
+                <v-chip variant="tonal" color="primary" class="text-pre-wrap" style="height: auto; font-size: 16px;"
+                    rounded="xl">{{
+                        chat.question
+                    }}</v-chip>
             </v-col>
-            <v-col cols="12" class="d-flex">
-                <div style="white-space: pre-wrap;">
+            <v-col cols="12">
+                <div class="text-pre-wrap pa-2" style="font-size: 16px;">
                     {{ index === localChats.length - 1 && chat.displayedResponse !== undefined
                         ? chat.displayedResponse
                         : chat.response }}
                 </div>
+                <div v-if="chat.actions?.length > 0">
+                    <v-row>
+                        <v-col cols="auto" v-for="(action, index) in chat.actions" :key="index">
+                            <v-btn class="ga-2 d-flex mt-2" @click="handleAction(action)">
+                                <v-icon class="mr-2">
+                                    {{ action.mdi }}
+                                </v-icon>
+                                {{ action.title }}
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </div>
             </v-col>
         </v-row>
+        <div v-else class="d-flex justify-center align-center " style="min-height: 50vh;">
+            <span class="text-h4 font-weight-bold">
+                Chào {{ user.name }}, tôi có thể giúp gì cho bạn?
+            </span>
+        </div>
         <v-spacer></v-spacer>
         <v-container class="w-100 d-flex justify-center align-center chat-input pa-0">
             <v-textarea :loading="responeLoading" :disabled="responeLoading" rounded="xl" clearable
@@ -54,7 +74,8 @@ import { ref, onMounted, watch, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import chats from '../mockDB/chats';
 import { useDisplay } from 'vuetify'
-
+import user from '../mockDB/user';
+import { handlers } from '../utils/handler';
 const { mobile } = useDisplay()
 
 const router = useRouter()
@@ -67,6 +88,15 @@ const error = ref(null)
 const inputString = ref('')
 const responeLoading = ref(null)
 const loading = ref(true)
+
+const handleAction = (action) => {
+    if (action.route) {
+        router.push(action.route);
+    } else if (action.value && handlers[action.value]) {
+        handlers[action.value]();
+    }
+}
+
 
 const scrollToBottom = () => {
     setTimeout(() => {
@@ -83,7 +113,7 @@ const fetchData = async (id) => {
     try {
         // Gọi API
         const res = chats.find((chat) => chat.id === id)
-        localChats.value = res.chats
+        localChats.value = res == null ? [] : res.chats
         loading.value = false
 
         // if create new chat

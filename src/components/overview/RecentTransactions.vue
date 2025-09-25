@@ -1,5 +1,5 @@
 <template>
-    <v-card class="border-md rounded-xl elevation-4">
+    <v-card class="">
         <v-card-title class="pb-0">
             <span class="text-h6 font-weight-bold">
                 Giao dịch gần đây

@@ -34,7 +34,7 @@
             {{ formatPriceNoSuffix(props.overview.balanceKPI.expense) }} {{ props.overview.balanceKPI.currency }}
         </div>
 
-        <div class="mt-2">
+        <div class="mt-2 mb-2">
             <div class="font-weight-bold mb-2">
                 <span>Tỷ lệ chi tiêu: </span>
                 <span>
@@ -45,19 +45,55 @@
             </div>
             <v-progress-linear :model-value="percentProcess" color="red" height="6" rounded />
         </div>
+
+        <div class="mt-6">
+            <span class="text-h6 font-weight-bold ">
+                Giao dịch gần đây
+            </span>
+            <v-list>
+                <v-list-item v-for="(transaction, index) in processRecentTransactions" :key="index">
+                    <div class="pt-0">
+                        <h3>{{ transaction.type }}</h3>
+                        <p>{{ transaction.description }}</p>
+                    </div>
+                </v-list-item>
+            </v-list>
+        </div>
     </v-card>
 
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { formatPriceNoSuffix } from '../../utils/format'
+import { computed, ref, onMounted } from 'vue'
+import { formatPriceNoSuffix, formatVietnamDate } from '../../utils/format'
 import { useDisplay } from 'vuetify'
+import overviewSumary from '../../mockDB/overview-sumary'
 
 const percentProcess = computed(() => ((props.overview.balanceKPI.expense / props.overview.balanceKPI.income) * 100).toFixed(1))
 const { lgAndDown } = useDisplay()
 
 const props = defineProps(['overview'])
+
+const recentTransactions = ref(null)
+
+const typeMap = ref({
+    income: 'Thu nhập',
+    expense: 'Chi tiêu'
+})
+
+const processRecentTransactions = computed(() => {
+    return recentTransactions.value?.map((transaction) => {
+        return {
+            type: typeMap.value[transaction.type] || '',
+            description: `${formatVietnamDate(transaction.date)} - ${transaction.category} - ${formatPriceNoSuffix(transaction.amount)} ${transaction.currency} - ${transaction.description}`
+        }
+    })
+})
+
+
+onMounted(() => {
+    recentTransactions.value = overviewSumary.recentTransactions
+})
 </script>
 
 <style></style>

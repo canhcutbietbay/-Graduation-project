@@ -1,12 +1,12 @@
 <template>
-    <v-card class="d-flex justify-center align-center w-100 h-100 rounded-xl elevation-4 border-md">
+    <div class="d-flex justify-center align-center w-100 h-100 " style="max-height: 500px;">
         <canvas ref="chartCanvas"></canvas>
-    </v-card>
+    </div>
 </template>
 
 <script setup>
 import { Chart } from "chart.js/auto";
-import { ref, watch } from "vue";
+import { ref, watch, nextTick } from "vue";
 
 const chartCanvas = ref(null);
 const chartInstance = ref(null);
@@ -39,7 +39,8 @@ function renderChart(data) {
 
 watch(
     () => props.data,
-    (newData) => {
+    async (newData) => {
+        await nextTick()
         if (newData && newData.labels && newData.datasets) {
             renderChart(newData);
         }

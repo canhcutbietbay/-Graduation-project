@@ -41,22 +41,22 @@
             </div>
         </template>
     </v-data-table>
-    <TransactionForm v-model:isOpen="isOpen" v-model:item="selectedItem"></TransactionForm>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { formatPrice, formatVietnamDate } from '../../utils/format'
-import TransactionForm from './TransactionForm.vue'
 import swal from '../../plugins/swal'
 import { useDisplay } from 'vuetify'
 import JsonExcel from "vue-json-excel3";
 import pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import emitter from '../../plugins/eventBus';
 
 const { mobile } = useDisplay()
 const props = defineProps(['transactions'])
 
+const search = ref(null)
 
 const json_fields = ref({
     "Ngày giao dịch": {
@@ -126,11 +126,6 @@ const exportPDF = () => {
     pdfMake.createPdf(docDefinition, undefined, undefined, pdfFonts).download("Các giao dịch gần đây.pdf");
 }
 
-
-const search = ref(null)
-const isOpen = ref(false)
-const selectedItem = ref(null)
-
 const headers = [
     { title: 'Ngày giao dịch', align: 'center', key: 'date', },
     { title: 'Loại giao dịch', align: 'center', key: 'type' },
@@ -141,14 +136,11 @@ const headers = [
     { title: 'Hành động', key: 'actions', align: 'center', sortable: false, width: '200px' },
 ]
 
-
 const addNewTransaction = () => {
-    isOpen.value = true
-    selectedItem.value = null
+    emitter.emit("openTransactionForm", null)
 }
 const editTransaction = (item) => {
-    isOpen.value = true
-    selectedItem.value = item
+    emitter.emit("openTransactionForm", item)
 }
 const deleteTransaction = (item) => {
     swal({
@@ -157,7 +149,6 @@ const deleteTransaction = (item) => {
         icon: "info",
     });
 }
-
 
 </script>
 

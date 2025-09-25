@@ -1,115 +1,52 @@
 export default [
     {
         "id": "1",
-        "title": "Chiến thắng Điện Biên Phủ",
+        "title": "AI Quản lí Chi tiêu",
         "chats": [
             {
-                "question": "Chiến dịch Điện Biên Phủ bắt đầu và kết thúc khi nào?",
-                "response": "Chiến dịch bắt đầu ngày 13 tháng 3 năm 1954 và kết thúc vào ngày 7 tháng 5 năm 1954 với chiến thắng vang dội của quân đội Việt Nam."
+                "question": "Làm sao để thêm một giao dịch mới?",
+                "response": "📝 Nhập số tiền, loại (thu/chi), danh mục, ngày và mô tả → nhấn 'Lưu'. Giao dịch sẽ hiển thị ngay.",
+                "actions": [
+                    {
+                        "mdi": "mdi-wallet-plus",
+                        "title": "Thêm giao dịch",
+                        "value": "add_transaction"
+                    }
+                ]
             },
             {
-                "question": "Điện Biên Phủ có vị trí chiến lược thế nào?",
-                "response": "Điện Biên Phủ là thung lũng lòng chảo ở Tây Bắc Việt Nam, được quân Pháp xây dựng thành một tập đoàn cứ điểm mạnh nhằm cắt đường tiếp tế và chia cắt chiến khu Việt Bắc."
+                "question": "Làm sao để tạo ngân sách hàng tháng?",
+                "response": "📌 Vào 'Ngân sách', chọn tháng và giới hạn cho từng danh mục (ví dụ: Ăn uống 3.000.000đ). Ứng dụng sẽ cảnh báo khi sắp đạt mức.",
+                "actions": [
+                    {
+                        "mdi": "mdi-finance",
+                        "title": "Tạo ngân sách",
+                        "value": "add_saving"
+                    }
+                ]
             },
             {
-                "question": "Ai là tổng chỉ huy chiến dịch Điện Biên Phủ?",
-                "response": "Đại tướng Võ Nguyên Giáp là người chỉ huy trực tiếp chiến dịch, nổi tiếng với quyết định táo bạo: chuyển từ \"đánh nhanh thắng nhanh\" sang \"đánh chắc tiến chắc\"."
+                "question": "Tôi muốn xem báo cáo chi tiêu, làm sao?",
+                "response": "📈 Xem biểu đồ theo tháng/danh mục, hoặc xuất file PDF/CSV.",
+                "actions": [
+                    {
+                        "mdi": "mdi-chart-line",
+                        "title": "Xem báo cáo tháng này",
+                        "route": "/"
+                    },
+                    {
+                        "mdi": "mdi-file-export",
+                        "title": "Xuất báo cáo PDF",
+                        "value": "export_pdf"
+                    }
+                ]
             },
             {
-                "question": "Diễn biến chính của chiến dịch như thế nào?",
-                "response": "Gồm ba đợt tấn công:\n- **Đợt 1**: 13–17/3 tiêu diệt Him Lam, Độc Lập\n- **Đợt 2**: Tấn công Eliane, Dominique\n- **Đợt 3**: 1–7/5 tổng tiến công, bắt sống De Castries."
-            },
-            {
-                "question": "Vai trò của pháo binh trong chiến dịch?",
-                "response": "Pháo binh được kéo qua đồi núi hiểm trở, tạo lợi thế lớn, phá hủy cứ điểm kiên cố của Pháp."
-            },
-            {
-                "question": "Lực lượng tham chiến gồm ai?",
-                "response": "Bao gồm bộ đội chủ lực, dân công hỏa tuyến, công binh, hậu cần với hơn 260.000 dân công."
-            },
-            {
-                "question": "Chiến thắng có ý nghĩa ra sao?",
-                "response": "Đánh dấu sự sụp đổ của thực dân Pháp tại Đông Dương và mở ra kỷ nguyên độc lập."
-            },
-            {
-                "question": "Cộng đồng quốc tế phản ứng thế nào?",
-                "response": "Được ca ngợi là bước ngoặt lịch sử, truyền cảm hứng cho phong trào giải phóng dân tộc toàn cầu."
-            }
-        ]
-    },
-    {
-        "id": "2",
-        "title": "Cách mạng Tháng Tám 1945",
-        "chats": [
-            {
-                "question": "Cách mạng Tháng Tám là gì?",
-                "response": "Là cuộc tổng khởi nghĩa do Việt Minh lãnh đạo vào tháng 8/1945, giành chính quyền về tay nhân dân trên phạm vi cả nước."
-            },
-            {
-                "question": "Nhược điểm của chính quyền Trần Trọng Kim trước cách mạng?",
-                "response": "Thiếu tổ chức, không kiểm soát được tình hình, gây hỗn loạn sau khi Nhật đầu hàng."
-            },
-            {
-                "question": "Việt Minh đã tổ chức như thế nào?",
-                "response": "Chuẩn bị lực lượng chính trị, quân sự và hậu cần từ nhiều năm trước."
-            },
-            {
-                "question": "Cách mạng diễn ra ra sao?",
-                "response": "Từ 14–28/8/1945, nổi dậy khắp nơi, nhanh chóng giành chính quyền ở Hà Nội, Huế và Sài Gòn."
-            },
-            {
-                "question": "Tuyên ngôn Độc lập đọc khi nào?",
-                "response": "Ngày 2/9/1945 tại Quảng trường Ba Đình, Hà Nội."
-            },
-            {
-                "question": "Ý nghĩa của cuộc cách mạng?",
-                "response": "Khai sinh nước Việt Nam Dân chủ Cộng hòa, lật đổ hoàn toàn chế độ thực dân và phong kiến."
-            },
-            {
-                "question": "Đặc điểm nổi bật của cuộc cách mạng này là gì?",
-                "response": "Xảy ra nhanh, ít đổ máu, khắp cả ba miền, thể hiện tinh thần đoàn kết dân tộc."
-            },
-            {
-                "question": "Ảnh hưởng quốc tế ra sao?",
-                "response": "Ghi dấu Việt Nam là quốc gia độc lập đầu tiên ở Đông Nam Á sau Thế chiến II."
-            }
-        ]
-    },
-    {
-        "id": "3",
-        "title": "Kháng chiến chống Pháp",
-        "chats": [
-            {
-                "question": "Chiến tranh Đông Dương lần thứ nhất diễn ra khi nào?",
-                "response": "Từ 1946 đến 1954, giữa Việt Minh và Pháp."
-            },
-            {
-                "question": "Chính sách 'địa phương kháng chiến' là gì?",
-                "response": "Kêu gọi nhân dân đứng lên tại địa phương, tạo hậu thuẫn và lực lượng cho cuộc kháng chiến."
-            },
-            {
-                "question": "Vai trò của chiến khu Việt Bắc?",
-                "response": "Là căn cứ địa lớn nhất, nơi tập trung lực lượng và tài nguyên để kháng chiến."
-            },
-            {
-                "question": "Cuộc chiến có bao nhiêu giai đoạn chính?",
-                "response": "Gồm: chiến tranh du kích, chiến tranh tổng lực, giành thắng lợi cuối cùng năm 1954."
-            },
-            {
-                "question": "Vai trò của hậu cần trong kháng chiến?",
-                "response": "Dân công chịu trách nhiệm vận chuyển vũ khí, lương thực qua địa hình hiểm trở."
-            },
-            {
-                "question": "Nét nổi bật của phương pháp chiến tranh Nhân dân?",
-                "response": "Liên quân, giáo dục, tự phát, lấy dân là gốc và dựa vào dân để đánh giặc."
-            },
-            {
-                "question": "Chiến tranh ảnh hưởng thế nào đến xã hội?",
-                "response": "Thúc đẩy tinh thần đoàn kết, xây dựng lực lượng dân quân hùng hậu."
-            },
-            {
-                "question": "Kết quả đạt được năm 1954 là gì?",
-                "response": "Chiến thắng Điện Biên Phủ dẫn đến Hiệp định Geneva, chấm dứt sự can thiệp của Pháp."
+                "question": "Tôi muốn xem báo cáo chi tiêu, làm sao?",
+                "response": "📈 Xem biểu đồ theo tháng/danh mục, hoặc xuất file PDF/CSV.",
+                "actions": [
+
+                ]
             }
         ]
     },

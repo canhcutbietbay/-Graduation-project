@@ -6,31 +6,17 @@
                 <v-form ref="form" v-model="valid">
                     <v-row>
                         <v-col cols="12" md="6">
-                            <datePick v-model="localItem.date" label="Ngày giao dịch" :rules="ruleRequires" />
+                            <v-text-field variant="outlined" density="compact" label="Tên hiển thị"
+                                v-model="localItem.name" :rules="ruleRequires"></v-text-field>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-select :items="typeArray" item-title="title" item-value="value" variant="outlined"
                                 density="compact" label="Loại giao dịch" v-model="localItem.type"
                                 :rules="ruleRequires"></v-select>
                         </v-col>
-                        <v-col cols="12" md="6">
-                            <v-text-field variant="outlined" density="compact" label="Số tiền" v-model="displayPrice"
-                                type="text" suffix="VND" @keypress="(e) => !/[0-9]/.test(e.key) && e.preventDefault()"
-                                :rules="ruleRequires"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-select :items="categories" item-title="name" item-value="id" variant="outlined"
-                                density="compact" label="Nhóm" v-model="localItem.category"
-                                :rules="ruleRequires"></v-select>
-                        </v-col>
-                        <v-col cols="12" md="6">
+                        <v-col cols="12">
                             <v-text-field variant="outlined" density="compact" label="Ghi chú"
                                 v-model="localItem.description" :rules="ruleRequires"></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <v-select :items="accounts" item-title="name" item-value="id" variant="outlined"
-                                density="compact" label="Tài khoản" v-model="localItem.account"
-                                :rules="ruleRequires"></v-select>
                         </v-col>
                     </v-row>
                 </v-form>
@@ -46,53 +32,31 @@
 
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue';
-import datePick from "../common/date-pick.vue";
 import swal from '../../plugins/swal';
-import { formatPriceNoSuffix } from '../../utils/format';
-import api from '../../plugins/api';
-import categories from '../../mockDB/categories';
-import accounts from '../../mockDB/accounts';
 
 const form = ref(null)
 const valid = ref(false)
-const localAccounts = ref([])
-const localCategories = ref([])
 
 const localItem = ref({})
-const typeArray = ref([
-    { title: 'Thu nhập', value: 'income' },
-    { title: 'Chi tiêu', value: 'expense' }
-])
 
 const props = defineProps({
     isOpen: Boolean,
     item: Object,
 });
 
-onMounted(async () => {
-    // accounts.value = await (await api.get('/accounts')).data
-    // categories.value = (await api.get('/categories')).data
-    localAccounts.value = accounts
-    localCategories.value = categories
-})
-
 const ruleRequires = ref([
     v => !!v || 'Trường này là bắt buộc'
+])
+
+const typeArray = ref([
+    { title: 'Tiết kiệm', value: 'saving' },
+    { title: 'Chi tiêu', value: 'expense' }
 ])
 
 const emit = defineEmits(["update:isOpen", "update:item"]);
 
 watch(props, () => {
     localItem.value = props.item == null ? {} : { ...props.item }
-})
-
-const displayPrice = computed({
-    get() {
-        return formatPriceNoSuffix(parseInt(localItem.value.amount) || 0)
-    },
-    set(val) {
-        localItem.value.amount = val.replace(/\D/g, "")
-    }
 })
 
 const closeDialog = () => {
@@ -104,7 +68,7 @@ const isAddNew = computed(() => {
 })
 
 const title = computed(() => {
-    return isAddNew.value ? "Thêm mới giao dịch" : "Chỉnh sửa giao dịch"
+    return isAddNew.value ? "Thêm mới ngân sách" : "Chỉnh sửa ngân sách"
 })
 
 const addNew = async () => {
@@ -116,6 +80,7 @@ const addNew = async () => {
             icon: "success",
         });
     }
+    closeDialog()
 }
 
 const save = () => {
